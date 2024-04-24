@@ -1,2 +1,2 @@
-# SS004_10
-1 2 3 4 5 6 7 8 9 10
+SNAKE GAME PROJECT (SS004_10) 
+- Nơi lưu trữ dự án
