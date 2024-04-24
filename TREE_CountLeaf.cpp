@@ -59,7 +59,7 @@ int CountLeaf(TREE T)
 
 
 int main() {
-	TREE T; //hay: TNODE* T;
+	TREE T; //hay: TNODE* T; OMG OMG OMG
 	T = NULL; // Khoi tao cay T rong, or: CreateEmptyTree(T)
 	CreateTree(T);
 
