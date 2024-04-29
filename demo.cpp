@@ -154,12 +154,16 @@ void CONRAN::DiChuyen(int x, int y) { // Hàm di chuyển của rắn
 
 
 
-
-
-
-
 bool CONRAN::gameover() { // Rắn chết và chương trình kết thúc khi rắn tự cắn phải mình hoặc chạm tường
-
+     for (int i = 1; i < ran.length; i++) {
+        if (ran.body[i].x == ran.body[0].x && ran.body[i].y == ran.body[0].y) {
+            return true;
+        }
+    }
+    if (ran.body[0].x == 10 || ran.body[0].x == 105 || ran.body[0].y == 1 || ran.body[0].y == 26) {
+        return true;
+    }
+    return false;
 }
 
 
