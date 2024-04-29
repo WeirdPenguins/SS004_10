@@ -107,6 +107,7 @@ void CONRAN::TaoRan() { // Hàm tạo rắn
     int x_head = 50;
     int y_head = 10;
     for (int i = 0; i < ran.length; i++) {
+        ran.body[i].x = x_head--;
         ran.body[i].y = y_head;
 }
 
@@ -130,6 +131,13 @@ void CONRAN::DiChuyen(int x, int y) { // Hàm di chuyển của rắn
         ran.body[i] = ran.body[i - 1];
     ran.body[0].x = x;
     ran.body[0].y = y;
+
+
+}
+
+
+
+
 }
 
 bool CONRAN::gameover() { // Rắn chết và chương trình kết thúc khi rắn tự cắn phải mình hoặc chạm tường
@@ -137,6 +145,9 @@ bool CONRAN::gameover() { // Rắn chết và chương trình kết thúc khi r�
 }
 
 void CONRAN::VeMoi() {
+
+    gotoxy(Food.x, Food.y);
+    cout << "X";
 
 }
 
