@@ -106,22 +106,19 @@ void CONRAN::startGame() {
 
 
 void CONRAN::VeKhung() { //Hàm vẽ tường giới hạn khu vực chơi
-    for (int i = MAX_LEFT ; i <= MAX_RIGHT; i++) {
+    for (int i = MAX_LEFT; i <= MAX_RIGHT; i++) {
         gotoxy(i, MAX_ABOVE);
-        cout << "+";
-        gotoxy(i, MAX_UNDER);
-        cout << "+";
+        cout << (char)220;
+        gotoxy(i, MAX_UNDER + 1);
+        cout << (char)223;
     }
-    for (int i = MAX_ABOVE; i < MAX_UNDER; i++) {
+    for (int i = MAX_ABOVE + 1; i <= MAX_UNDER; i++) {
         gotoxy(MAX_LEFT, i);
-        cout << "+";
+        cout << (char)221;
         gotoxy(MAX_RIGHT, i);
-        cout << "+";
+        cout << (char)222;
     }
 }
-
-
-
 void CONRAN::TaoRan() { // Hàm tạo rắn
     int x_head = 50;
     int y_head = 10;
@@ -171,7 +168,7 @@ bool CONRAN::gameover() { // Rắn chết và chương trình kết thúc khi r�
 
 void CONRAN::VeMoi() {
     gotoxy(Food.x, Food.y);
-    cout << "X";
+    cout << (char)42;
 
 }
 
