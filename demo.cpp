@@ -98,7 +98,11 @@ void CONRAN::startGame() {
         AnMoi();
         if (gameover()) {
             gotoxy(50, 14);
-            cout << "GAME OVER";
+            cout << "GAME OVER!!!";
+            gotoxy(50, 15);
+            cout << "Your Score : " << score;
+            Sleep(1500);
+            score = 0;
             break;
         }
     }
@@ -132,13 +136,13 @@ void CONRAN::VeRan() { // Hàm vẽ rắn
     for (int i = 0; i < ran.length; i++) {
         gotoxy(ran.body[i].x, ran.body[i].y);
         if (i == 0) {
-            cout << "0";
+            cout << (char)254;
         }
-        else if ( i == ran.length - 1 ) {
-            cout << "-";
+        else if (i == ran.length - 1) {
+            cout << (char)219;
         }
-         else {
-            cout << "O";
+        else {
+            cout << (char)219;
         }
     }
 }
