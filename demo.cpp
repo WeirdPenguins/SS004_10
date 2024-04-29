@@ -4,7 +4,7 @@
 #include <string>
 #include <conio.h>
 using namespace std;
-void gotoxy( int column, int line ); //H�m goto
+void gotoxy( int column, int line ); //Hàm goto
 
 
 
@@ -16,7 +16,7 @@ private:
 
     struct Ran {
         Diem body[100];
-        int length; //�? d�i r?n
+        int length; //Độ dài rắn
     };
 
     Ran ran;
@@ -26,7 +26,7 @@ private:
     Diem Food;
 
 public:
-    CONRAN() { // H�m kh?i t?o gi� tr? ban d?u
+    CONRAN() { // Hàm khởi tạo giá trị ban đầu
         ran.length = 4;
         toc_do = 300;
       //  tang_toc = 4;
@@ -103,11 +103,7 @@ void CONRAN::startGame() {
 
 =======
 
-<<<<<<< HEAD
-void CONRAN::VeKhung() { //H�m v? tu?ng gi?i h?n khu v?c choi
-=======
 void CONRAN::VeKhung() { //Hàm vẽ tường giới hạn khu vực chơi
->>>>>>> e88d2e93daea683342b97e59256ecded0353d2d6
     for (int i = 10; i < 105; i++) {
         gotoxy(i, 1);
         cout << "+";
@@ -124,11 +120,7 @@ void CONRAN::VeKhung() { //Hàm vẽ tường giới hạn khu vực chơi
 
 
 
-<<<<<<< HEAD
-void CONRAN::TaoRan() { // H�m t?o r?n
-=======
 void CONRAN::TaoRan() { // Hàm tạo rắn
->>>>>>> e88d2e93daea683342b97e59256ecded0353d2d6
     int x_head = 50;
     int y_head = 10;
     for (int i = 0; i < ran.length; i++) {
@@ -137,11 +129,7 @@ void CONRAN::TaoRan() { // Hàm tạo rắn
       }
 }
 
-<<<<<<< HEAD
-void CONRAN::VeRan() { // H�m v? r?n
-=======
 void CONRAN::VeRan() { // Hàm vẽ rắn
->>>>>>> e88d2e93daea683342b97e59256ecded0353d2d6
     for (int i = 0; i < ran.length; i++) {
         gotoxy(ran.body[i].x, ran.body[i].y);
         if (i == 0) {
@@ -156,11 +144,7 @@ void CONRAN::VeRan() { // Hàm vẽ rắn
     }
 }
 
-<<<<<<< HEAD
-void CONRAN::DiChuyen(int x, int y) { // H�m di chuy?n c?a r?n
-=======
 void CONRAN::DiChuyen(int x, int y) { // Hàm di chuyển của rắn
->>>>>>> e88d2e93daea683342b97e59256ecded0353d2d6
     for (int i = ran.length - 1; i > 0; i--) {
         ran.body[i] = ran.body[i - 1];
     }
@@ -168,9 +152,10 @@ void CONRAN::DiChuyen(int x, int y) { // Hàm di chuyển của rắn
     ran.body[0].y = y;
 }
 
-<<<<<<< HEAD
-bool CONRAN::gameover() { // R?n ch?t v� chuong tr�nh k?t th�c khi r?n t? c?n ph?i m�nh ho?c ch?m tu?ng
-      for (int i = 1; i < ran.length; i++) {
+
+
+bool CONRAN::gameover() { // Rắn chết và chương trình kết thúc khi rắn tự cắn phải mình hoặc chạm tường
+     for (int i = 1; i < ran.length; i++) {
         if (ran.body[i].x == ran.body[0].x && ran.body[i].y == ran.body[0].y) {
             return true;
         }
@@ -179,16 +164,6 @@ bool CONRAN::gameover() { // R?n ch?t v� chuong tr�nh k?t th�c khi r?n t? c?n ph
         return true;
     }
     return false;
-=======
-
-
-
-
-
-
-bool CONRAN::gameover() { // Rắn chết và chương trình kết thúc khi rắn tự cắn phải mình hoặc chạm tường
-
->>>>>>> e88d2e93daea683342b97e59256ecded0353d2d6
 }
 
 
@@ -198,11 +173,7 @@ void CONRAN::VeMoi() {
 
 }
 
-<<<<<<< HEAD
-void CONRAN::AnMoi() {   // R?n an m?i th� s? d�i ra th�m 1 d?t
-=======
 void CONRAN::AnMoi() {   // Rắn ăn mồi thì sẽ dài ra thêm 1 đốt
->>>>>>> e88d2e93daea683342b97e59256ecded0353d2d6
     if (ran.body[0].x == Food.x && ran.body[0].y == Food.y) {
         ran.length++;
         do {
@@ -215,11 +186,7 @@ void CONRAN::AnMoi() {   // Rắn ăn mồi thì sẽ dài ra thêm 1 đốt
 
 
 
-<<<<<<< HEAD
-bool CONRAN::KiemTraMoi() {  // Ki?m tra xem m?i c� b? tr�ng v?i th�n r?n kh�ng
-=======
 bool CONRAN::KiemTraMoi() {  // Kiểm tra xem mồi có bị trùng với thân rắn không
->>>>>>> e88d2e93daea683342b97e59256ecded0353d2d6
 
    for (int i = 0; i < ran.length; ++i) {
         if (Food.x == ran.body[i].x && Food.y == ran.body[i].y) {
@@ -260,11 +227,7 @@ int main() {
             cout << "Exiting...\n";
             return 0;
         case '3':
-<<<<<<< HEAD
-            cout << "Day la bai lam SnakeGame don gian c?a nhom.\n";
-=======
             cout << "Day la bai lam SnakeGame đon gian của nhom.\n";
->>>>>>> e88d2e93daea683342b97e59256ecded0353d2d6
             cout << "Gom cac thanh vien : \n";
             cout << "1.Duong Phat Vinh\n";
             cout << "2.Nguyen Dai Tung\n";
