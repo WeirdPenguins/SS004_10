@@ -104,14 +104,39 @@ void CONRAN::VeKhung() { //Hàm vẽ tường giới hạn khu vực chơi
 }
 
 void CONRAN::TaoRan() { // Hàm tạo rắn
-
+    int x_head = 50;
+    int y_head = 10;
+    for (int i = 0; i < ran.length; i++) {
+        ran.body[i].x = x_head--;
+        ran.body[i].y = y_head;
 }
 
 void CONRAN::VeRan() { // Hàm vẽ rắn
-
+    for (int i = 0; i < ran.length; i++) {
+        gotoxy(ran.body[i].x, ran.body[i].y);
+        if (i == 0) {
+            cout << "0";
+        }
+        else if ( i == ran.length - 1 ) {
+            cout << -;
+        }
+         else {
+            cout << "O";
+        }
+    }
 }
 
 void CONRAN::DiChuyen(int x, int y) { // Hàm di chuyển của rắn
+    for (int i = ran.length - 1; i > 0; i--)
+        ran.body[i] = ran.body[i - 1];
+    ran.body[0].x = x;
+    ran.body[0].y = y;
+
+
+}
+
+
+
 
 }
 
@@ -120,8 +145,10 @@ bool CONRAN::gameover() { // Rắn chết và chương trình kết thúc khi r�
 }
 
 void CONRAN::VeMoi() {
+
     gotoxy(Food.x, Food.y);
     cout << "X";
+
 }
 
 void CONRAN::AnMoi() {   // Rắn ăn mồi thì sẽ dài ra thêm 1 đốt
