@@ -155,8 +155,13 @@ void CONRAN::AnMoi() {   // Rắn ăn mồi thì sẽ dài ra thêm 1 đốt
 
 }
 
-bool CONRAN::KiemTraMoi() {  // Kiểm tra xem mồi có bị trùng với thân rắn không
-
+bool CONRAN::KiemTraMoi(int x, int y) {  // Kiểm tra xem mồi có bị trùng với thân rắn không
+   for (int i = 0; i < ran.length; ++i) {
+        if (Food.x == ran.body[i].x && Food.y == ran.body[i].y) {
+            return true;
+        }
+    }
+    return false;
 }
 
 void CONRAN::Score() {
