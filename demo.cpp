@@ -99,7 +99,8 @@ void CONRAN::startGame() {
     }
 }
 
-void CONRAN::VeKhung(int x,int y) { //Hàm vẽ tường giới hạn khu vực chơi
+
+void CONRAN::VeKhung() { //Hàm vẽ tường giới hạn khu vực chơi
     for (int i = 10; i < 105; i++) {
         gotoxy(i, 1);
         cout << "+";
@@ -114,9 +115,11 @@ void CONRAN::VeKhung(int x,int y) { //Hàm vẽ tường giới hạn khu vực 
     }
 }
 
+
 }
 
 void CONRAN::TaoRan() { // Hàm tạo rắn
+
 
 }
 
@@ -125,20 +128,56 @@ void CONRAN::VeRan() { // Hàm vẽ rắn
 }
 
 void CONRAN::DiChuyen(int x, int y) { // Hàm di chuyển của rắn
-
+=======
+    int x_head = 50;
+    int y_head = 10;
+    for (int i = 0; i < ran.length; i++) {
+        ran.body[i].x = x_head--;
+        ran.body[i].y = y_head;
 }
+
+void CONRAN::VeRan() { // Hàm vẽ rắn
+    for (int i = 0; i < ran.length; i++) {
+        gotoxy(ran.body[i].x, ran.body[i].y);
+        if (i == 0) {
+            cout << "0";
+        }
+        else if ( i == ran.length - 1 ) {
+            cout << -;
+        }
+         else {
+            cout << "O";
+        }
+    }
+}
+
+void CONRAN::DiChuyen(int x, int y) { // Hàm di chuyển của rắn
+    for (int i = ran.length - 1; i > 0; i--) {
+        ran.body[i] = ran.body[i - 1];
+    }
+    ran.body[0].x = x;
+    ran.body[0].y = y;
+}
+
+
+
+
+
+
 
 bool CONRAN::gameover() { // Rắn chết và chương trình kết thúc khi rắn tự cắn phải mình hoặc chạm tường
 
 }
 
-void CONRAN::VeMoi(int x,int y) {
+
+void CONRAN::VeMoi() {
     gotoxy(Food.x, Food.y);
     cout << "X";
 
 }
 
-void CONRAN::AnMoi(int x,int y) {   // Rắn ăn mồi thì sẽ dài ra thêm 1 đốt
+
+void CONRAN::AnMoi() {   // Rắn ăn mồi thì sẽ dài ra thêm 1 đốt
     if (ran.body[0].x == Food.x && ran.body[0].y == Food.y) {
         ran.length++;
         do {
@@ -149,7 +188,17 @@ void CONRAN::AnMoi(int x,int y) {   // Rắn ăn mồi thì sẽ dài ra thêm 1
     }
 }
 
+
+
+}
+
 bool CONRAN::KiemTraMoi() {  // Kiểm tra xem mồi có bị trùng với thân rắn không
+   for (int i = 0; i < ran.length; ++i) {
+        if (Food.x == ran.body[i].x && Food.y == ran.body[i].y) {
+            return true;
+        }
+    }
+    return false;
 
 }
 
