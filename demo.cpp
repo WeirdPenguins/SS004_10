@@ -101,6 +101,8 @@ void CONRAN::startGame() {
 
 
 
+=======
+
 void CONRAN::VeKhung() { //Hàm vẽ tường giới hạn khu vực chơi
     for (int i = 10; i < 105; i++) {
         gotoxy(i, 1);
@@ -191,8 +193,13 @@ bool CONRAN::KiemTraMoi() {  // Kiểm tra xem mồi có bị trùng với thân
 
 }
 
-void CONRAN::Score() {
 
+void CONRAN::Score() {
+    if (ran.body[0].x == Food.x && ran.body[0].y == Food.y) {
+        gotoxy(107, 2);
+        score += 5;
+        cout << "Score: " << score;
+    }
 }
 
 int main() {
