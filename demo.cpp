@@ -3,6 +3,8 @@
 #include <cstdlib>
 #include <string>
 #include <conio.h>
+#define Tuong_Duoi 25
+#define Tuong_Phai 104
 using namespace std;
 void gotoxy( int column, int line ); //Hàm goto
 
@@ -101,17 +103,17 @@ void CONRAN::startGame() {
 
 
 void CONRAN::VeKhung() { //Hàm vẽ tường giới hạn khu vực chơi
-    for (int i = 10; i < 105; i++) {
+    for (int i = 10; i <= Tuong_Phai; i++) {
         gotoxy(i, 1);
-        cout << "+";
+        cout << (char)220;
         gotoxy(i, 26);
-        cout << "+";
+        cout << (char)223;
     }
-    for (int i = 1; i < 26; i++) {
+    for (int i = 2; i <= Tuong_Duoi; i++) {
         gotoxy(10, i);
-        cout << "+";
+        cout << (char)221;
         gotoxy(104, i);
-        cout << "+";
+        cout << (char)222;
     }
 }
 
@@ -172,11 +174,8 @@ bool CONRAN::gameover() { // Rắn chết và chương trình kết thúc khi r�
 
 void CONRAN::VeMoi() {
     gotoxy(Food.x, Food.y);
-    cout << "X";
-
+    cout << (char)233;
 }
-
-
 void CONRAN::AnMoi() {   // Rắn ăn mồi thì sẽ dài ra thêm 1 đốt
     if (ran.body[0].x == Food.x && ran.body[0].y == Food.y) {
         ran.length++;
