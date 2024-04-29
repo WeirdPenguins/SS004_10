@@ -141,36 +141,36 @@ int main() {
 
     do {
         system("cls");
-        cout << "\t\t\t\t\t\t\t\t\t\t\t\tMenu\n";
-        cout << "\t\t\t\t\t\t\t\t\t\t1. Start Game\n";
-        cout << "\t\t\t\t\t\t\t\t\t\t2. Exit\n";
-        cout << "\t\t\t\t\t\t\t\t\t\t3.Infomation\n";
-        cout << "\t\t\t\t\t\t\t\t\t\tEnter your choice: ";
+        cout << "\t\t\t\t\t\t\tMenu\n";
+        cout << "\t\t\t\t\t\t1. Start Game\n";
+        cout << "\t\t\t\t\t\t2. Exit\n";
+        cout << "\t\t\t\t\t\t3. Infomation\n";
+        cout << "\t\t\t\t\t\tEnter your choice: ";
         cin >> choice;
 
         switch (choice) {
-            case '1':
-                game.startGame();
-                break;
-            case '2':
-                cout << "Exiting...\n";
-                break;
-            case '3':
-                cout << "Đây là bài làm Snakegame đơn giản của nhóm.\n";
-                cout <<"Gom cac thanh vien : \n";
-                cout <<"1.Duong Phat Vinh\n";
-                cout <<"2.Nguyen Dai Tung\n";
-                cout <<"3.Nguyen Huynh Minh Thu\n";
-                cout <<"4.Do Van Vu\n";
-                wcout << "\t\t\t\tHƯỚNG DẪN" << endl;
-		        cout << "\tDùng phím mũi tên để di chuyển rắn ăn mồi nhiều nhất có thể nhưng không để\n\tchạm thân và tường" << endl;
-		        cout <<"Chuc cac ban may man";
-                break;
-            default:
-                cout << "Invalid choice. Please enter again.\n";
-                break;
+        case '1':
+            game.startGame();
+            break;
+        case '2':
+            cout << "Exiting...\n";
+            return 0;
+        case '3':
+            cout << "Day la bai lam Snakegame đon gian của nhom.\n";
+            cout << "Gom cac thanh vien : \n";
+            cout << "1.Duong Phat Vinh\n";
+            cout << "2.Nguyen Dai Tung\n";
+            cout << "3.Nguyen Huynh Minh Thu\n";
+            cout << "4.Do Van Vu\n";
+            wcout << "\t\t\t\tHUONG DAN" << endl;
+            cout << "\tDung phim mui tên de di chuyen ran an moi nhieu nhat co the nhung khong đe\n\tcham than vao tuong" << endl;
+            cout << "Chuc cac ban may man";
+            return 0;
+        default:
+            cout << "Invalid choice. Please enter again.\n";
+            break;
         }
-    } while (choice != '2');
+    } while (choice != '2' || choice != '3');
 
     _getch();
     return 0;
