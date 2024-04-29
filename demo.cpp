@@ -4,6 +4,11 @@
 #include <string>
 #include <conio.h>
 using namespace std;
+
+#define MAX_RIGHT 104
+#define MAX_LEFT 10
+#define MAX_ABOVE 1
+#define MAX_UNDER 25
 void gotoxy( int column, int line ); //Hàm goto
 
 
@@ -101,16 +106,16 @@ void CONRAN::startGame() {
 
 
 void CONRAN::VeKhung() { //Hàm vẽ tường giới hạn khu vực chơi
-    for (int i = 10; i < 105; i++) {
-        gotoxy(i, 1);
+    for (int i = MAX_LEFT ; i <= MAX_RIGHT; i++) {
+        gotoxy(i, MAX_ABOVE);
         cout << "+";
-        gotoxy(i, 26);
+        gotoxy(i, MAX_UNDER);
         cout << "+";
     }
-    for (int i = 1; i < 26; i++) {
-        gotoxy(10, i);
+    for (int i = MAX_ABOVE; i < MAX_UNDER; i++) {
+        gotoxy(MAX_LEFT, i);
         cout << "+";
-        gotoxy(104, i);
+        gotoxy(MAX_RIGHT, i);
         cout << "+";
     }
 }
@@ -157,7 +162,7 @@ bool CONRAN::gameover() { // Rắn chết và chương trình kết thúc khi r�
             return true;
         }
     }
-    if (ran.body[0].x == 10 || ran.body[0].x == 105 || ran.body[0].y == 1 || ran.body[0].y == 26) {
+    if (ran.body[0].x == MAX_LEFT || ran.body[0].x == MAX_RIGHT || ran.body[0].y == MAX_ABOVE || ran.body[0].y == MAX_UNDER) {
         return true;
     }
     return false;
