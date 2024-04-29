@@ -179,8 +179,8 @@ void CONRAN::AnMoi() {   // Rắn ăn mồi thì sẽ dài ra thêm 1 đốt
     if (ran.body[0].x == Food.x && ran.body[0].y == Food.y) {
         ran.length++;
         do {
-            Food.x = rand() % (104 - 11 + 1) + 11;
-            Food.y = rand() % (25 - 2 + 1) + 2;
+            Food.x = rand() % (MAX_RIGHT - MAX_LEFT) + MAX_LEFT+1;
+            Food.y = rand() % (MAX_UNDER - MAX_ABOVE) + MAX_ABOVE+1;
         } while (KiemTraMoi());
         VeMoi();
     }
