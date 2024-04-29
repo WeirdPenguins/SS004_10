@@ -136,8 +136,41 @@ void CONRAN::Score() {
 }
 
 int main() {
+    char choice;
     CONRAN game;
-    game.startGame();
+
+    do {
+        system("cls");
+        cout << "Menu:\n";
+        cout << "1. Start Game\n";
+        cout << "2. Exit\n";
+        cout << "3.About\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case '1':
+                game.startGame();
+                break;
+            case '2':
+                cout << "Exiting...\n";
+                break;
+            case '3':
+                cout << "Đây là bài làm Snakegame đơn giản của nhóm.\n";
+                cout <<"Gom cac thanh vien : \n";
+                cout <<"1.Duong Phat Vinh\n";
+                cout <<"2.Nguyen Dai Tung\n";
+                cout <<"3.Nguyen Huynh Minh Thu\n";
+                cout <<"4.Do Van Vu\n";
+                wcout << "\t\t\t\tHƯỚNG DẪN" << endl;
+		        cout << "\tDùng phím mũi tên để di chuyển rắn ăn mồi nhiều nhất có thể nhưng không để\n\tchạm thân và tường" << endl;
+		        cout <<"Chuc cac ban may man";
+            default:
+                cout << "Invalid choice. Please enter again.\n";
+                break;
+        }
+    } while (choice != '2');
+
     _getch();
     return 0;
 }
