@@ -141,11 +141,11 @@ int main() {
 
     do {
         system("cls");
-        cout << "Menu:\n";
-        cout << "1. Start Game\n";
-        cout << "2. Exit\n";
-        cout << "3.About\n";
-        cout << "Enter your choice: ";
+        cout << "\t\t\t\t\t\t\t\t\t\t\t\tMenu\n";
+        cout << "\t\t\t\t\t\t\t\t\t\t1. Start Game\n";
+        cout << "\t\t\t\t\t\t\t\t\t\t2. Exit\n";
+        cout << "\t\t\t\t\t\t\t\t\t\t3.Infomation\n";
+        cout << "\t\t\t\t\t\t\t\t\t\tEnter your choice: ";
         cin >> choice;
 
         switch (choice) {
@@ -165,6 +165,7 @@ int main() {
                 wcout << "\t\t\t\tHƯỚNG DẪN" << endl;
 		        cout << "\tDùng phím mũi tên để di chuyển rắn ăn mồi nhiều nhất có thể nhưng không để\n\tchạm thân và tường" << endl;
 		        cout <<"Chuc cac ban may man";
+                break;
             default:
                 cout << "Invalid choice. Please enter again.\n";
                 break;
@@ -174,7 +175,6 @@ int main() {
     _getch();
     return 0;
 }
-
 
 void gotoxy( int column, int line )
   {
