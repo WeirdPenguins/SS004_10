@@ -100,9 +100,6 @@ void CONRAN::startGame() {
 }
 
 
-
-=======
-
 void CONRAN::VeKhung() { //Hàm vẽ tường giới hạn khu vực chơi
     for (int i = 10; i < 105; i++) {
         gotoxy(i, 1);
@@ -136,7 +133,7 @@ void CONRAN::VeRan() { // Hàm vẽ rắn
             cout << "0";
         }
         else if ( i == ran.length - 1 ) {
-            cout << -;
+            cout << "-";
         }
          else {
             cout << "O";
@@ -214,8 +211,8 @@ int main() {
         system("cls");
         cout << "\t\t\t\t\t\t\tMenu\n";
         cout << "\t\t\t\t\t\t1. Start Game\n";
-        cout << "\t\t\t\t\t\t2. Exit\n";
-        cout << "\t\t\t\t\t\t3. Infomation\n";
+        cout << "\t\t\t\t\t\t2. Information\n";
+        cout << "\t\t\t\t\t\t3. Exit\n";
         cout << "\t\t\t\t\t\tEnter your choice: ";
         cin >> choice;
 
@@ -223,28 +220,29 @@ int main() {
         case '1':
             game.startGame();
             break;
-        case '2':
+        case '3':
             cout << "Exiting...\n";
             return 0;
-        case '3':
-            cout << "Day la bai lam SnakeGame đon gian của nhom.\n";
+        case '2':
+            cout << "Day la bai lam SnakeGame don gian cua nhom.\n";
             cout << "Gom cac thanh vien : \n";
             cout << "1.Duong Phat Vinh\n";
             cout << "2.Nguyen Dai Tung\n";
             cout << "3.Nguyen Huynh Minh Thu\n";
             cout << "4.Do Van Vu\n";
             wcout << "\t\t\t\tHUONG DAN" << endl;
-            cout << "\tDung phim mui ten de di chuyen ran an moi nhieu nhat co the nhung khong de\n\tcham than vao tuong" << endl;
-            cout << "Chuc cac ban may man";
-            return 0;
+            cout << "Dung phim mui ten de di chuyen ran an moi nhieu nhat co the nhung khong cham than vao tuong." << endl;
+            cout << "Chuc cac ban choi vui ve!"<<endl;
+            cout << "Press anykey to return menu.";
+            cin  >> choice;
         default:
             cout << "Invalid choice. Please enter again.\n";
             break;
         }
-    } while (choice != '2' || choice != '3');
+    } while (choice != 3 );
 
 
-    CONRAN game;
+
     game.startGame();
 
     _getch();
