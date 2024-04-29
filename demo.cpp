@@ -120,7 +120,8 @@ bool CONRAN::gameover() { // Rắn chết và chương trình kết thúc khi r�
 }
 
 void CONRAN::VeMoi() {
-
+    gotoxy(Food.x, Food.y);
+    cout << "X";
 }
 
 void CONRAN::AnMoi() {   // Rắn ăn mồi thì sẽ dài ra thêm 1 đốt
