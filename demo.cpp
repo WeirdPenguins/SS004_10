@@ -99,7 +99,20 @@ void CONRAN::startGame() {
     }
 }
 
-void CONRAN::VeKhung() { //Hàm vẽ tường giới hạn khu vực chơi
+void CONRAN::VeKhung(int x,int y) { //Hàm vẽ tường giới hạn khu vực chơi
+    for (int i = 10; i < 105; i++) {
+        gotoxy(i, 1);
+        cout << "+";
+        gotoxy(i, 26);
+        cout << "+";
+    }
+    for (int i = 1; i < 26; i++) {
+        gotoxy(10, i);
+        cout << "+";
+        gotoxy(104, i);
+        cout << "+";
+    }
+}
 
 }
 
@@ -119,14 +132,21 @@ bool CONRAN::gameover() { // Rắn chết và chương trình kết thúc khi r�
 
 }
 
-void CONRAN::VeMoi() {
+void CONRAN::VeMoi(int x,int y) {
     gotoxy(Food.x, Food.y);
     cout << "X";
 
 }
 
-void CONRAN::AnMoi() {   // Rắn ăn mồi thì sẽ dài ra thêm 1 đốt
-
+void CONRAN::AnMoi(int x,int y) {   // Rắn ăn mồi thì sẽ dài ra thêm 1 đốt
+    if (ran.body[0].x == Food.x && ran.body[0].y == Food.y) {
+        ran.length++;
+        do {
+            Food.x = rand() % (104 - 11 + 1) + 11;
+            Food.y = rand() % (25 - 2 + 1) + 2;
+        } while (KiemTraMoi());
+        VeMoi();
+    }
 }
 
 bool CONRAN::KiemTraMoi() {  // Kiểm tra xem mồi có bị trùng với thân rắn không
