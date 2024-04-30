@@ -30,13 +30,16 @@ private:
     //int tang_toc;
     int score;
     Point Food;
+    int skin;
 
 public:
+
     CONRAN() { // Hàm khởi tạo giá trị ban đầu
         ran.length = 3;
         toc_do = 300;
       //  tang_toc = 4;
         score = 0;
+        skin = 1; // Skin mặc định
     }
 
     void startGame();
@@ -51,6 +54,7 @@ public:
     void Score();
     void resetGame();
     void LoadingBar();
+    void selectSkin();
 };
 
 void menu (CONRAN game);
@@ -133,6 +137,7 @@ void CONRAN::TaoRan() { // Hàm tạo rắn
 }
 
 void CONRAN::VeRan() { // Hàm vẽ rắn
+  if ( skin == 1 ) {
     for (int i = 0; i < ran.length; i++) {
         gotoxy(ran.body[i].x, ran.body[i].y);
         if (i == 0) {
@@ -143,6 +148,29 @@ void CONRAN::VeRan() { // Hàm vẽ rắn
         }
     }
   }
+  else if ( skin == 2 ) {
+    for (int i = 0; i < ran.length; i++) {
+        gotoxy(ran.body[i].x, ran.body[i].y);
+        if (i == 0) {
+            cout << (char)233;
+        }
+        else {
+            cout << (char)237;
+        }
+    }
+  }
+  else {
+      for (int i = 0; i < ran.length; i++) {
+        gotoxy(ran.body[i].x, ran.body[i].y);
+        if (i == 0) {
+            cout << (char)240;
+        }
+        else {
+            cout << (char)186;
+        }
+    }
+  }
+}
 
 void CONRAN::DiChuyen(int x, int y) { // Hàm di chuyển của rắn
     for (int i = ran.length - 1; i > 0; i--) {
@@ -254,7 +282,34 @@ void CONRAN :: LoadingBar()
 	_getch();
 }
 
+void CONRAN::selectSkin() {
+    system("cls");
+    gotoxy(50,2);
+    cout << "Choose a skin for the snake:";
+    gotoxy(50,3);
+    cout << "1. Default (Xau trai khong ai iu)";
+    gotoxy(50,4);
+    cout << "2. Ac quy lanh lung";
+    gotoxy(50, 5);
+    cout << "3. Dep trai ngau loi";
 
+    char choice = _getch();
+    switch (choice) {
+    case '1':
+        skin = 1; // Default skin
+        break;
+    case '2':
+        skin = 2;
+        break;
+    case '3':
+        skin = 3;
+        break;
+    default:
+        cout << "Invalid choice. Default skin will be used.\n";
+        skin = 1; // Default skin
+        break;
+    }
+}
 
 int main() {
     CONRAN game;
@@ -333,17 +388,12 @@ void menu(CONRAN game)
             cout << "Dung phim mui ten de di chuyen ran an moi nhieu nhat co the." << endl;
             cout << "Khi ran dung tuong hoac tu can ban than thi game se ket thuc." << endl;
             cout << "Chuc cac ban choi vui ve!"<<endl;
-            cout << "Press anykey to return menu."<<endl;
+            cout << "Press any key to return menu."<<endl;
             cout << "============================================================================" << endl;
             _getch();
             break;
         case '2':
-            system("cls");
-            gotoxy(50, 2);
-            cout << "1. Default";
-            gotoxy(50, 3);
-            cout << "2. Dep trai";
-            _getch();
+            game.selectSkin();
             break;
         case '4':
             cout << "Exiting...\n";
@@ -353,7 +403,5 @@ void menu(CONRAN game)
             _getch();
             break;
     }
-} while (true);
-
-
-}
+   } while (true);
+ }
