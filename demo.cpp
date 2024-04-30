@@ -50,6 +50,7 @@ public:
     bool KiemTraMoi();
     void Score();
     void resetGame();
+    void LoadingBar();
 };
 
 void menu (CONRAN game);
@@ -141,7 +142,7 @@ void CONRAN::VeRan() { // Hàm vẽ rắn
             cout << (char)219;
         }
     }
-}
+  }
 
 void CONRAN::DiChuyen(int x, int y) { // Hàm di chuyển của rắn
     for (int i = ran.length - 1; i > 0; i--) {
@@ -211,9 +212,53 @@ void CONRAN::resetGame() {
     score = 0; // Đặt lại điểm số
 }
 
+void CONRAN :: LoadingBar()
+{
+	gotoxy(7, 19);
+	cout << "LOADING..";
+	char x = 219;
+	int r = 0;
+	for (int i = 18; i <= 80; i++)
+	{
+		gotoxy(16, 19);
+		cout << ".";
+		Sleep(80);
+		gotoxy(16, 19);
+		cout << " ";
+		gotoxy(i, 19);
+		if (i <= 44)
+		{
+			Sleep(50);
+		}
+		else
+		{
+			Sleep(20);
+		}
+		cout << x;
+		gotoxy(82, 19);
+		if (i == 80)
+		{
+			cout << 100 << "%";
+			gotoxy(16, 19);
+			cout << ".";
+			break;
+		}
+		else
+		{
+			cout << r << "%";
+			r++;
+		}
+	}
+	gotoxy(16,20);
+	cout << "Press any key to continue...";
+	_getch();
+}
+
+
 
 int main() {
     CONRAN game;
+    game.LoadingBar();
     menu(game);
     return 0;
 }
@@ -298,7 +343,6 @@ void menu(CONRAN game)
             cout << "1. Default";
             gotoxy(50, 3);
             cout << "2. Dep trai";
-           // char cSkin = _getch();
             _getch();
             break;
         case '4':
