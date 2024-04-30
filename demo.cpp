@@ -11,7 +11,7 @@ using namespace std;
 #define MAX_UNDER 25
 
 void gotoxy( int column, int line ); //Hàm goto
-void getChar( int &huong); // Lấy kí tự từ bàn phím
+void getChar( int &huong); // Lấy kí tự từ bàn phím để di chuyển rắn
 
 
 class CONRAN {
@@ -49,6 +49,7 @@ public:
     void AnMoi();
     bool KiemTraMoi();
     void Score();
+    void resetGame();
 };
 
 void menu (CONRAN game);
@@ -91,15 +92,15 @@ void CONRAN::startGame() {
         Sleep(100);
         Score();
         AnMoi();
-        if (gameover()) {
+        if ( gameover() ) {
             gotoxy(50, 14);
             cout << "GAME OVER!!!";
             gotoxy(50, 15);
             cout << "Your Score : " << score;
-            gotoxy(30, 16);
-            cout << "Press any key, or wait 3 seconds to return to the menu.";
-            Sleep(3000);
-            score = 0;
+            gotoxy(40, 16);
+            cout << "Press any key to return to the menu.";
+            _getch();
+            resetGame(); // Gọi hàm resetGame
             break;
         }
     }
@@ -204,6 +205,13 @@ void CONRAN::Score() {
     }
 }
 
+void CONRAN::resetGame() {
+    ran.length = 3;
+    TaoRan(); // Thiết lập lại vị trí của con rắn
+    score = 0; // Đặt lại điểm số
+}
+
+
 int main() {
     CONRAN game;
     menu(game);
@@ -254,13 +262,13 @@ void gotoxy( int column, int line )
 
 void menu(CONRAN game)
 {
-       do {
+   do {
     system("cls");
     cout << "\t\t\t\t\t\t\tMenu\n";
     cout << "\t\t\t\t\t\t1. Start Game\n";
-    cout << "\t\t\t\t\t\t2. Information\n";
-    cout << "\t\t\t\t\t\t3. Exit\n";
-    cout << "\t\t\t\t\tSelect your choice from the keyboard!\n ";
+    cout << "\t\t\t\t\t\t2. Skin\n";
+    cout << "\t\t\t\t\t\t3. Information\n";
+    cout << "\t\t\t\t\t\t4. Exit\n";
 
     char choice = _getch(); // Lấy lựa chọn từ bàn phím
 
@@ -269,30 +277,39 @@ void menu(CONRAN game)
             game.startGame();
             break;
         case '3':
-            cout << "Exiting...\n";
-            return;
-        case '2':
             cout << "============================================================================" << endl;
             cout << "Day la bai lam SnakeGame don gian cua nhom.\n";
             cout << "Gom cac thanh vien : \n";
-            cout << "1.Duong Phat Vinh\n";
-            cout << "2.Nguyen Dai Tung\n";
-            cout << "3.Nguyen Huynh Minh Thu\n";
-            cout << "4.Do Van Vu\n";
+            cout << "1. Duong Phat Vinh\n";
+            cout << "2. Nguyen Dai Tung\n";
+            cout << "3. Nguyen Huynh Minh Thu\n";
+            cout << "4. Do Van Vu\n";
             wcout << "\t\t\t\tHUONG DAN" << endl;
             cout << "Dung phim mui ten de di chuyen ran an moi nhieu nhat co the." << endl;
             cout << "Khi ran dung tuong hoac tu can ban than thi game se ket thuc." << endl;
             cout << "Chuc cac ban choi vui ve!"<<endl;
-            cout << "Press any key to return to the menu."<<endl;
+            cout << "Press anykey to return menu."<<endl;
             cout << "============================================================================" << endl;
             _getch();
             break;
+        case '2':
+            system("cls");
+            gotoxy(50, 2);
+            cout << "1. Default";
+            gotoxy(50, 3);
+            cout << "2. Dep trai";
+           // char cSkin = _getch();
+            _getch();
+            break;
+        case '4':
+            cout << "Exiting...\n";
+            return;
         default:
             cout << "Invalid choice. Please choose again.\n";
-            Sleep(1500);
             _getch();
             break;
     }
 } while (true);
+
 
 }
