@@ -59,6 +59,55 @@ public:
 
 void menu (CONRAN game);
 
+int main() {
+    CONRAN game;
+    game.LoadingBar();
+    menu(game);
+    return 0;
+}
+
+
+void gotoxy( int column, int line )
+  {
+  COORD coord;
+  coord.X = column;
+  coord.Y = line;
+  SetConsoleCursorPosition(
+    GetStdHandle( STD_OUTPUT_HANDLE ),
+    coord
+    );
+  }
+
+  void getChar(int &huong)
+{
+        if (_kbhit()) {
+            char c = _getch();
+            if (c == -32) {   // Kiểm tra xem có phải là các phím mũi tên không
+                c = _getch();
+                if (  c == 72   && huong != 0) {
+                    huong = 1;
+                } else if ( c == 80  && huong != 1) {
+                    huong = 0;
+                } else if ( c == 75 && huong != 2) {
+                    huong = 3;
+                } else if ( c == 77 && huong != 3) {
+                    huong = 2;
+                }
+            }
+         else {
+                if ((c == 'w') && huong != 0) {
+                    huong = 1;
+                } else if ((c == 's') && huong != 1) {
+                    huong = 0;
+                } else if ((c == 'a') && huong != 2) {
+                    huong = 3;
+                } else if ((c == 'd') && huong != 3) {
+                    huong = 2;
+                }
+            }
+        }
+}
+
 void CONRAN::startGame() {
     system("cls");
     VeKhung();
@@ -309,55 +358,6 @@ void CONRAN::selectSkin() {
         skin = 1; // Default skin
         break;
     }
-}
-
-int main() {
-    CONRAN game;
-    //game.LoadingBar();
-    menu(game);
-    return 0;
-}
-
-
-void gotoxy( int column, int line )
-  {
-  COORD coord;
-  coord.X = column;
-  coord.Y = line;
-  SetConsoleCursorPosition(
-    GetStdHandle( STD_OUTPUT_HANDLE ),
-    coord
-    );
-  }
-
-  void getChar(int &huong)
-{
-        if (_kbhit()) {
-            char c = _getch();
-            if (c == -32) {   // Kiểm tra xem có phải là các phím mũi tên không
-                c = _getch();
-                if (  c == 72   && huong != 0) {
-                    huong = 1;
-                } else if ( c == 80  && huong != 1) {
-                    huong = 0;
-                } else if ( c == 75 && huong != 2) {
-                    huong = 3;
-                } else if ( c == 77 && huong != 3) {
-                    huong = 2;
-                }
-            }
-         else {
-                if ((c == 'w') && huong != 0) {
-                    huong = 1;
-                } else if ((c == 's') && huong != 1) {
-                    huong = 0;
-                } else if ((c == 'a') && huong != 2) {
-                    huong = 3;
-                } else if ((c == 'd') && huong != 3) {
-                    huong = 2;
-                }
-            }
-        }
 }
 
 void menu(CONRAN game)
