@@ -313,7 +313,7 @@ void CONRAN::selectSkin() {
 
 int main() {
     CONRAN game;
-    game.LoadingBar();
+    //game.LoadingBar();
     menu(game);
     return 0;
 }
@@ -385,7 +385,7 @@ void menu(CONRAN game)
             cout << "3. Nguyen Huynh Minh Thu\n";
             cout << "4. Do Van Vu\n";
             wcout << "\t\t\t\tHUONG DAN" << endl;
-            cout << "Dung phim mui ten de di chuyen ran an moi nhieu nhat co the." << endl;
+            cout << "Dung phim mui ten hoac cac phim AWSD de di chuyen ran an moi nhieu nhat co the." << endl;
             cout << "Khi ran dung tuong hoac tu can ban than thi game se ket thuc." << endl;
             cout << "Chuc cac ban choi vui ve!"<<endl;
             cout << "Press any key to return menu."<<endl;
