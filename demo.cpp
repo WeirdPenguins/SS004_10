@@ -325,6 +325,7 @@ void CONRAN :: LoadingBar()
 			cout << r << "%";
 			r++;
 		}
+        
 	}
 	gotoxy(16,20);
 	cout << "Press any key to continue...";
