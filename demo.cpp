@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <string>
 #include <conio.h>
-<<<<<<< HEAD
+
 #include <mmsystem.h>
 #include <thread>
 
@@ -11,10 +11,10 @@ using namespace std;
 
 #pragma comment(lib, "winmm.lib")
 
-=======
+
 using namespace std;
 
->>>>>>> main
+
 #define MAX_RIGHT 104
 #define MAX_LEFT 10
 #define MAX_ABOVE 1
@@ -22,10 +22,8 @@ using namespace std;
 
 void gotoxy( int column, int line ); //Hàm goto
 void getChar( int &huong); // Lấy kí tự từ bàn phím để di chuyển rắn
-<<<<<<< HEAD
+
 void PlayEatSound(); // Hàm phát ra âm thanh khi rắn ăn mồi
-=======
->>>>>>> main
 
 
 class CONRAN {
@@ -48,11 +46,6 @@ public:
 
     CONRAN() { // Hàm khởi tạo giá trị ban đầu
         ran.length = 3;
-<<<<<<< HEAD
-=======
-        toc_do = 300;
-      //  tang_toc = 4;
->>>>>>> main
         score = 0;
         skin = 1; // Skin mặc định
     }
@@ -342,7 +335,6 @@ void CONRAN :: LoadingBar()
 			cout << r << "%";
 			r++;
 		}
-<<<<<<< HEAD
 
 	}
 	gotoxy(16,20);
@@ -350,15 +342,8 @@ void CONRAN :: LoadingBar()
 	_getch();
 }
 
-=======
-        
-	}
-	gotoxy(16,20);
-	cout << "Press any key to continue...";
-	_getch();
-}
 
->>>>>>> main
+
 void CONRAN::selectSkin() {
     system("cls");
     gotoxy(50,2);
@@ -388,13 +373,11 @@ void CONRAN::selectSkin() {
     }
 }
 
-<<<<<<< HEAD
+
  void PlayEatSound() {
     PlaySound(TEXT("audio_sound_eating.wav"), NULL, SND_FILENAME | SND_ASYNC);
 }
 
-=======
->>>>>>> main
 void menu(CONRAN game)
 {
    do {
@@ -440,8 +423,3 @@ void menu(CONRAN game)
     }
    } while (true);
  }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> main
