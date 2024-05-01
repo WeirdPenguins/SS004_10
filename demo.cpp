@@ -3,33 +3,41 @@
 #include <cstdlib>
 #include <string>
 #include <conio.h>
+#include <mmsystem.h>
+#include <thread>
+
 using namespace std;
-void gotoxy( int column, int line ); //Hàm goto
 
+#pragma comment(lib, "winmm.lib")
 
+#define MAX_RIGHT 104
+#define MAX_LEFT 10
+#define MAX_ABOVE 1
+#define MAX_UNDER 25
+
+void gotoxy(int column, int line);
+void getChar(int& huong);
+void PlayEatSound();
 
 class CONRAN {
 private:
-    struct Diem {
+    struct Point {
         int x, y;
     };
 
     struct Ran {
-        Diem body[100];
+        Point body[100];
         int length; //Độ dài rắn
     };
 
     Ran ran;
     int toc_do;
-    //int tang_toc;
     int score;
-    Diem Food;
+    Point Food;
 
 public:
     CONRAN() { // Hàm khởi tạo giá trị ban đầu
-        ran.length = 4;
-        toc_do = 300;
-      //  tang_toc = 4;
+        ran.length = 3;
         score = 0;
     }
 
@@ -43,7 +51,11 @@ public:
     void AnMoi();
     bool KiemTraMoi();
     void Score();
+    void resetGame();
+    void LoadingBar();
 };
+
+void menu(CONRAN game);
 
 void CONRAN::startGame() {
     system("cls");
@@ -59,90 +71,79 @@ void CONRAN::startGame() {
     int huong = 2;
 
     while (true) {
-        if (_kbhit()) {
-            char c = _getch();
-            if (c == -32) {
-                c = _getch();
-                if (c == 72 && huong != 0) {
-                    huong = 1;
-                } else if (c == 80 && huong != 1) {
-                    huong = 0;
-                } else if (c == 75 && huong != 2) {
-                    huong = 3;
-                } else if (c == 77 && huong != 3) {
-                    huong = 2;
-                }
-            }
-        }
+        getChar(huong);
 
         if (huong == 0) {
             y++;
-        } else if (huong == 1) {
+        }
+        else if (huong == 1) {
             y--;
-        } else if (huong == 2) {
+        }
+        else if (huong == 2) {
             x++;
-        } else if (huong == 3) {
+        }
+        else if (huong == 3) {
             x--;
         }
+
         gotoxy(ran.body[ran.length - 1].x, ran.body[ran.length - 1].y);
         cout << " ";
         DiChuyen(x, y);
         VeRan();
-        Sleep(100);
         Score();
         AnMoi();
         if (gameover()) {
             gotoxy(50, 14);
-            cout << "GAME OVER";
+            cout << "GAME OVER!!!";
+            gotoxy(50, 15);
+            cout << "Your Score : " << score;
+            gotoxy(40, 16);
+            cout << "Press any key to return to the menu.";
+            _getch();
+            resetGame();
             break;
         }
+        Sleep(100);
     }
 }
 
-
-
-void CONRAN::VeKhung() { //Hàm vẽ tường giới hạn khu vực chơi
-    for (int i = 10; i < 105; i++) {
-        gotoxy(i, 1);
-        cout << "+";
-        gotoxy(i, 26);
-        cout << "+";
+void CONRAN::VeKhung() {
+    for (int i = MAX_LEFT; i <= MAX_RIGHT; i++) {
+        gotoxy(i, MAX_ABOVE);
+        cout << (char)220;
+        gotoxy(i, MAX_UNDER + 1);
+        cout << (char)223;
     }
-    for (int i = 1; i < 26; i++) {
-        gotoxy(10, i);
-        cout << "+";
-        gotoxy(104, i);
-        cout << "+";
+    for (int i = MAX_ABOVE + 1; i <= MAX_UNDER; i++) {
+        gotoxy(MAX_LEFT, i);
+        cout << (char)221;
+        gotoxy(MAX_RIGHT, i);
+        cout << (char)222;
     }
 }
 
-
-
-void CONRAN::TaoRan() { // Hàm tạo rắn
+void CONRAN::TaoRan() {
     int x_head = 50;
     int y_head = 10;
     for (int i = 0; i < ran.length; i++) {
         ran.body[i].x = x_head--;
         ran.body[i].y = y_head;
-      }
+    }
 }
 
-void CONRAN::VeRan() { // Hàm vẽ rắn
+void CONRAN::VeRan() {
     for (int i = 0; i < ran.length; i++) {
         gotoxy(ran.body[i].x, ran.body[i].y);
         if (i == 0) {
-            cout << "0";
+            cout << (char)254;
         }
-        else if ( i == ran.length - 1 ) {
-            cout << -;
-        }
-         else {
-            cout << "O";
+        else {
+            cout << (char)219;
         }
     }
 }
 
-void CONRAN::DiChuyen(int x, int y) { // Hàm di chuyển của rắn
+void CONRAN::DiChuyen(int x, int y) {
     for (int i = ran.length - 1; i > 0; i--) {
         ran.body[i] = ran.body[i - 1];
     }
@@ -150,104 +151,195 @@ void CONRAN::DiChuyen(int x, int y) { // Hàm di chuyển của rắn
     ran.body[0].y = y;
 }
 
-
-
-
-
-
-
-bool CONRAN::gameover() { // Rắn chết và chương trình kết thúc khi rắn tự cắn phải mình hoặc chạm tường
-
+bool CONRAN::gameover() {
+    for (int i = 1; i < ran.length; i++) {
+        if (ran.body[i].x == ran.body[0].x && ran.body[i].y == ran.body[0].y) {
+            return true;
+        }
+    }
+    if (ran.body[0].x == MAX_LEFT || ran.body[0].x == MAX_RIGHT || ran.body[0].y == MAX_ABOVE || ran.body[0].y == MAX_UNDER) {
+        return true;
+    }
+    return false;
 }
-
 
 void CONRAN::VeMoi() {
     gotoxy(Food.x, Food.y);
-    cout << "X";
-
+    cout << (char)42;
 }
 
-void CONRAN::AnMoi() {   // Rắn ăn mồi thì sẽ dài ra thêm 1 đốt
+void CONRAN::AnMoi() {
     if (ran.body[0].x == Food.x && ran.body[0].y == Food.y) {
         ran.length++;
         do {
-            Food.x = rand() % (104 - 11 + 1) + 11;
-            Food.y = rand() % (25 - 2 + 1) + 2;
+            Food.x = rand() % (MAX_RIGHT - MAX_LEFT) + MAX_LEFT + 1;
+            Food.y = rand() % (MAX_UNDER - MAX_ABOVE) + MAX_ABOVE + 1;
         } while (KiemTraMoi());
         VeMoi();
+        // Tạo một luồng mới để phát âm thanh
+        thread soundThread(PlayEatSound);
+        soundThread.detach(); // Tách luồng ra khỏi luồng chính để chạy độc lập
     }
 }
 
-
-
-bool CONRAN::KiemTraMoi() {  // Kiểm tra xem mồi có bị trùng với thân rắn không
-
-   for (int i = 0; i < ran.length; ++i) {
+bool CONRAN::KiemTraMoi() {
+    for (int i = 0; i < ran.length; ++i) {
         if (Food.x == ran.body[i].x && Food.y == ran.body[i].y) {
             return true;
         }
     }
     return false;
-
 }
 
 void CONRAN::Score() {
+    if (ran.body[0].x == Food.x && ran.body[0].y == Food.y) {
+        gotoxy(107, 2);
+        score += 5;
+        cout << "Score: " << score;
+    }
+}
 
+void CONRAN::resetGame() {
+    ran.length = 3;
+    TaoRan();
+    score = 0;
+}
+
+void CONRAN::LoadingBar() {
+    gotoxy(7, 19);
+    cout << "LOADING..";
+    char x = 219;
+    int r = 0;
+    for (int i = 18; i <= 80; i++) {
+        gotoxy(16, 19);
+        cout << ".";
+        Sleep(80);
+        gotoxy(16, 19);
+        cout << " ";
+        gotoxy(i, 19);
+        if (i <= 44) {
+            Sleep(50);
+        }
+        else {
+            Sleep(20);
+        }
+        cout << x;
+        gotoxy(82, 19);
+        if (i == 80) {
+            cout << 100 << "%";
+            gotoxy(16, 19);
+            cout << ".";
+            break;
+        }
+        else {
+            cout << r << "%";
+            r++;
+        }
+    }
+    gotoxy(16, 20);
+    cout << "Press any key to continue...";
+    _getch();
 }
 
 int main() {
-    char choice;
     CONRAN game;
+    game.LoadingBar();
+    menu(game);
+    return 0;
+}
 
+void gotoxy(int column, int line) {
+    COORD coord;
+    coord.X = column;
+    coord.Y = line;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+void getChar(int& huong) {
+    if (_kbhit()) {
+        char c = _getch();
+        if (c == -32) {
+            c = _getch();
+            if (c == 72 && huong != 0) {
+                huong = 1;
+            }
+            else if (c == 80 && huong != 1) {
+                huong = 0;
+            }
+            else if (c == 75 && huong != 2) {
+                huong = 3;
+            }
+            else if (c == 77 && huong != 3) {
+                huong = 2;
+            }
+        }
+        else {
+            if ((c == 'w' || c == 'W') && huong != 0) {
+                huong = 1;
+            }
+            else if ((c == 's' || c == 'S') && huong != 1) {
+                huong = 0;
+            }
+            else if ((c == 'a' || c == 'A') && huong != 2) {
+                huong = 3;
+            }
+            else if ((c == 'd' || c == 'D') && huong != 3) {
+                huong = 2;
+            }
+        }
+    }
+}
+
+void PlayEatSound() {
+    PlaySound(TEXT("audio_sound_eating.wav"), NULL, SND_FILENAME | SND_ASYNC);
+}
+
+void menu(CONRAN game) {
     do {
         system("cls");
         cout << "\t\t\t\t\t\t\tMenu\n";
         cout << "\t\t\t\t\t\t1. Start Game\n";
-        cout << "\t\t\t\t\t\t2. Exit\n";
-        cout << "\t\t\t\t\t\t3. Infomation\n";
-        cout << "\t\t\t\t\t\tEnter your choice: ";
-        cin >> choice;
+        cout << "\t\t\t\t\t\t2. Skin\n";
+        cout << "\t\t\t\t\t\t3. Information\n";
+        cout << "\t\t\t\t\t\t4. Exit\n";
+
+        char choice = _getch();
 
         switch (choice) {
         case '1':
             game.startGame();
             break;
-        case '2':
-            cout << "Exiting...\n";
-            return 0;
         case '3':
-            cout << "Day la bai lam SnakeGame đon gian của nhom.\n";
+            cout << "============================================================================" << endl;
+            cout << "Day la bai lam SnakeGame don gian cua nhom.\n";
             cout << "Gom cac thanh vien : \n";
-            cout << "1.Duong Phat Vinh\n";
-            cout << "2.Nguyen Dai Tung\n";
-            cout << "3.Nguyen Huynh Minh Thu\n";
-            cout << "4.Do Van Vu\n";
+            cout << "1. Duong Phat Vinh\n";
+            cout << "2. Nguyen Dai Tung\n";
+            cout << "3. Nguyen Huynh Minh Thu\n";
+            cout << "4. Do Van Vu\n";
             wcout << "\t\t\t\tHUONG DAN" << endl;
-            cout << "\tDung phim mui ten de di chuyen ran an moi nhieu nhat co the nhung khong de\n\tcham than vao tuong" << endl;
-            cout << "Chuc cac ban may man";
-            return 0;
+            cout << "Dung phim mui ten de di chuyen ran an moi nhieu nhat co the." << endl;
+            cout << "Khi ran dung tuong hoac tu can ban than thi game se ket thuc." << endl;
+            cout << "Chuc cac ban choi vui ve!" << endl;
+            cout << "Press anykey to return menu." << endl;
+            cout << "============================================================================" << endl;
+            _getch();
+            break;
+        case '2':
+            system("cls");
+            gotoxy(50, 2);
+            cout << "1. Default";
+            gotoxy(50, 3);
+            cout << "2. Dep trai";
+            _getch();
+            break;
+        case '4':
+            cout << "Exiting...\n";
+            return;
         default:
-            cout << "Invalid choice. Please enter again.\n";
+            cout << "Invalid choice. Please choose again.\n";
+            _getch();
             break;
         }
-    } while (choice != '2' || choice != '3');
-
-
-    CONRAN game;
-    game.startGame();
-
-    _getch();
-    return 0;
+    } while (true);
 }
-
-
-void gotoxy( int column, int line )
-  {
-  COORD coord;
-  coord.X = column;
-  coord.Y = line;
-  SetConsoleCursorPosition(
-    GetStdHandle( STD_OUTPUT_HANDLE ),
-    coord
-    );
-  }
