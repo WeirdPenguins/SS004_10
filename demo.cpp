@@ -3,26 +3,23 @@
 #include <cstdlib>
 #include <string>
 #include <conio.h>
-
 #include <mmsystem.h>
 #include <thread>
 
 using namespace std;
-
-#pragma comment(lib, "winmm.lib")
-
-
-using namespace std;
-
 
 #define MAX_RIGHT 104
 #define MAX_LEFT 10
 #define MAX_ABOVE 1
 #define MAX_UNDER 25
 
+using namespace std;
+
+#pragma comment(lib, "winmm.lib")
+
+
 void gotoxy( int column, int line ); //Hàm goto
 void getChar( int &huong); // Lấy kí tự từ bàn phím để di chuyển rắn
-
 void PlayEatSound(); // Hàm phát ra âm thanh khi rắn ăn mồi
 
 
@@ -63,14 +60,16 @@ public:
     void resetGame();
     void LoadingBar();
     void selectSkin();
+
+    static void menu(CONRAN game);
 };
 
-void menu (CONRAN game);
+
 
 int main() {
     CONRAN game;
     game.LoadingBar();
-    menu(game);
+    game.menu(game);
     return 0;
 }
 
@@ -378,7 +377,7 @@ void CONRAN::selectSkin() {
     PlaySound(TEXT("audio_sound_eating.wav"), NULL, SND_FILENAME | SND_ASYNC);
 }
 
-void menu(CONRAN game)
+void CONRAN::menu(CONRAN game)
 {
    do {
     system("cls");
