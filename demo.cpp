@@ -60,8 +60,7 @@ public:
     void resetGame();
     void LoadingBar();
     void selectSkin();
-
-    static void menu(CONRAN game);
+    void menu();
 };
 
 
@@ -69,7 +68,7 @@ public:
 int main() {
     CONRAN game;
     game.LoadingBar();
-    game.menu(game);
+    game.menu();
     return 0;
 }
 
@@ -377,7 +376,7 @@ void CONRAN::selectSkin() {
     PlaySound(TEXT("audio_sound_eating.wav"), NULL, SND_FILENAME | SND_ASYNC);
 }
 
-void CONRAN::menu(CONRAN game)
+void CONRAN::menu()
 {
    do {
     system("cls");
@@ -391,7 +390,7 @@ void CONRAN::menu(CONRAN game)
 
     switch (choice) {
         case '1':
-            game.startGame();
+            startGame();
             break;
         case '3':
             cout << "============================================================================" << endl;
@@ -410,7 +409,7 @@ void CONRAN::menu(CONRAN game)
             _getch();
             break;
         case '2':
-            game.selectSkin();
+            selectSkin();
             break;
         case '4':
             cout << "Exiting...\n";
